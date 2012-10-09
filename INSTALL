@@ -1,0 +1,43 @@
+<?php
+//Extract function from http://www.php.net/manual/en/ziparchive.extractto.php
+function extractZipDirTo($zip, $dir, $path) {
+	$files = array();
+	for($i = 0; $i < $zip->numFiles; $i++) {
+		$entry = $zip->getNameIndex($i);
+		//Use strpos() to check if the entry name contains the directory we want to extract
+		if (strpos($entry, $dir)) {
+			//Add the entry to our array if it is in our desired directory
+			$files[] = $entry;
+		}
+	}
+	//Feed $files array to extractTo() to get only the files we want
+	if ($zip->extractTo($path, $files) === TRUE) {
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
+
+//grab latest zend 1 framework (TODO: find way to ensure the link is the most recent version)
+$zend_url = 'http://packages.zendframework.com/releases/ZendFramework-1.12.0/ZendFramework-1.12.0.zip';
+//don't warn us if the file exists already.
+if($zend_zip_file = fopen('zend.zip', 'x+b')){
+	echo "Downloading Zend Framework at $zend_url. Please wait.\n";
+	fwrite($zend_zip_file, file_get_contents($zend_url));
+	fclose($zend_zip_file);
+}
+echo "Finished downloading Zend. Extracting.\n";
+$zend_zip = new ZipArchive();
+if($zend_zip->open('zend.zip')!==true){
+	exit("File is broken. Try downloading again");
+}
+
+//if($zend_zip->extractTo('library/')){
+if(extractZipDirTo($zend_zip,'/library/Zend','library/Zend')){
+	$zend_zip->close();
+	exit('Setup complete. Make sure mod_rewrite is enabled and this folder has AllowOverride is set to All in your Apache configuration');
+}
+else{
+	exit("Problems extracting files. Check permissions on the library folder");
+}
+?>
