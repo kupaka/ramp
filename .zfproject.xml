@@ -32,6 +32,7 @@
         </controllerFile>
         <controllerFile controllerName="Settingtable">
           <actionMethod actionName="index"/>
+          <actionMethod actionName="add"/>
         </controllerFile>
         <controllerFile controllerName="TableSetup">
           <actionMethod actionName="index"/>
@@ -42,6 +43,8 @@
         <formFile formName="TableRowEntry"/>
         <formFile formName="LoginForm"/>
         <formFile formName="TableRecordEntry"/>
+        <formFile formName="Settingtable"/>
+        <formFile formName="SettingtableOptions"/>
       </formsDirectory>
       <layoutsDirectory>
         <layoutScriptsDirectory>
@@ -109,6 +112,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="tableSetup">
             <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Settingtable">
+            <viewScriptFile forActionName="add"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
