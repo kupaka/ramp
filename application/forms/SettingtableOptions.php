@@ -15,11 +15,12 @@ class Application_Form_SettingtableOptions extends Zend_Form
     public function init()
 	{
 		$this->setMethod('post');
-		$column = array_shift($this->columnNames);
-		$this->addElement('text', $column, array('label' => $column)); 
+		foreach($this->columnNames as $column)
+		{
+			$this->addElement('text', $column . "Name", array('label'=>'Readable name for ' . $column));
+			$this->addElement('checkbox', $column . "Show", array('label'=>'Show ' . $column));
+		}
 		$this->addElement('submit', 'submit', array('ignore'=> true));
     }
-
-
 }
 
