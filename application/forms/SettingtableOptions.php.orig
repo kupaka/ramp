@@ -21,7 +21,8 @@ class Application_Form_SettingtableOptions extends Zend_Form
 		$this->setMethod('post');
 		foreach($this->columnNames as $column)
 		{
-			$name = $this->createElement('text', "field." . $column . ".label", array('label'=>'Readable name for ' . $column));
+<<<<<<< Updated upstream
+			$name = $this->createElement('text', $column . "Name", array('label'=>'Readable name for ' . $column));
 			$name->setDecorators(array(
 				'ViewHelper',
 				'Errors',
@@ -31,7 +32,7 @@ class Application_Form_SettingtableOptions extends Zend_Form
 				)
 			));
 			$this->addElement($name);
-			$show = $this->createElement('checkbox', "field." . $column . ".hide", array('label'=>'Hide '));
+			$show = $this->createElement('checkbox', $column . "Show", array('label'=>'Show '));
 			$show->setDecorators(array(
 				'ViewHelper',
 				'Errors',
@@ -41,6 +42,10 @@ class Application_Form_SettingtableOptions extends Zend_Form
 				)
 			));
 			$this->addElement($show);
+=======
+			$this->addElement('text', 'field.' . $column . '.label', array('label'=>'Readable name for ' . $column));
+			$this->addElement('checkbox', 'field.' . $column . '.hide', array('label'=>'Hide ' . $column));
+>>>>>>> Stashed changes
 		}
 		$this->addElement('submit', 'submit', array('ignore'=> true));
     }

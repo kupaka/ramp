@@ -1,5 +1,9 @@
 <?php
+<<<<<<< Updated upstream
+$this->title = "Table Settings";
+=======
 $this->title = "Table Details";
+>>>>>>> Stashed changes
 $this->headTitle($this->title);
 echo $this->form;
 ?>
