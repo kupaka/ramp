@@ -1,3 +1,4 @@
 library/Zend
 *.swp
 application/configs/application.ini
+application/settings/GenFiles/*
