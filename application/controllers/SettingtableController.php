@@ -19,7 +19,7 @@ class SettingtableController extends Zend_Controller_Action
     }
     public function writeAction()
     {
-	   $this->write_ini_file($this->getRequest()->getPost(), basename('GenFiles/data.txt'), false);
+	   $this->write_ini_file($this->getRequest()->getPost(), APPLICATION_PATH . "/settings/GenFiles/data.ini", false);
     }
 // Method to write an ini file found at http://stackoverflow.com/questions/1268378/create-ini-file-write-values-in-php
 function write_ini_file($assoc_arr, $path, $has_sections=FALSE) { 

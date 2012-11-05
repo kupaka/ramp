@@ -21,7 +21,7 @@ class Application_Form_SettingtableOptions extends Zend_Form
 		$this->setMethod('post');
 		foreach($this->columnNames as $column)
 		{
-			$name = $this->createElement('text', "field." . $column . ".label", array('label'=>'Readable name for ' . $column));
+			$name = $this->createElement('text', "field_" . $column . "_label", array('label'=>'Readable name for ' . $column));
 			$name->setDecorators(array(
 				'ViewHelper',
 				'Errors',
@@ -31,7 +31,7 @@ class Application_Form_SettingtableOptions extends Zend_Form
 				)
 			));
 			$this->addElement($name);
-			$show = $this->createElement('checkbox', "field." . $column . ".hide", array('label'=>'Hide '));
+			$show = $this->createElement('checkbox', "field_" . $column . "_hide", array('label'=>'Hide '));
 			$show->setDecorators(array(
 				'ViewHelper',
 				'Errors',
