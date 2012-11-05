@@ -16,8 +16,7 @@ class Application_Form_SettingtableOptions extends Zend_Form
 	//uses code from http://stackoverflow.com/questions/3848188/appending-or-prepending-html-tags-to-zend-form-element
     public function init()
 	{
-		$url = $this->getView()->url();
-		$this->setAction(substr($url, 0, strlen($url)-4).'/write');
+		$this->setAction('write');
 		$this->setMethod('post');
 		foreach($this->columnNames as $column)
 		{
