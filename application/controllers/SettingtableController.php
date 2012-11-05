@@ -22,22 +22,25 @@ class SettingtableController extends Zend_Controller_Action
 	   $this->write_ini_file($this->getRequest()->getPost(), APPLICATION_PATH . "/settings/GenFiles/data.ini");
     }
 
+	function addStops($string){
+		return preg_replace(array('/^([^_]*?)_/','/_([^_]*?)$/'),array("$1.",".$1"), $string);
+	}
 	// Method to write an ini file found at http://stackoverflow.com/questions/1268378/create-ini-file-write-values-in-php
 	function write_ini_file($assoc_arr, $path, $has_sections=FALSE) { 
 		$content = ""; 
 		if ($has_sections) { 
 			foreach ($assoc_arr as $key=>$elem) { 
-				$content .= "[".addStops($key)."]\n"; 
+				$content .= "[".$this->addStops($key)."]\n"; 
 				foreach ($elem as $key2=>$elem2) { 
 					if(is_array($elem2)) 
 					{ 
 						for($i=0;$i<count($elem2);$i++) 
 						{ 
-							$content .= addStops($key2)."[] = \"".$elem2[$i]."\"\n"; 
+							$content .= $this->addStops($key2)."[] = \"".$elem2[$i]."\"\n"; 
 						} 
 					} 
-					else if($elem2=="") $content .= addStops($key2)." = \n"; 
-					else $content .= addStops($key2)." = \"".$elem2."\"\n"; 
+					else if($elem2=="") $content .= $this->addStops($key2)." = \n"; 
+					else $content .= $this->addStops($key2)." = \"".$elem2."\"\n"; 
 				} 
 			} 
 		} 
@@ -47,15 +50,15 @@ class SettingtableController extends Zend_Controller_Action
 				{ 
 					for($i=0;$i<count($elem);$i++) 
 					{ 
-						$content .= addStops($key)."[] = \"".$elem[$i]."\"\n"; 
+						$content .= $this->addStops($key)."[] = \"".$elem[$i]."\"\n"; 
 					} 
 				} 
-				else if($elem=="") $content .= addStops($key)." = \n"; 
-				else $content .= addStops($key)." = \"".$elem."\"\n"; 
+				else if($elem=="") $content .= $this->addStops($key)." = \n"; 
+				else $content .= $this->addStops($key)." = \"".$elem."\"\n"; 
 			} 
 		} 
 
-		if (!$handle = fopen($path, 'w')) { 
+		if (!$handle = fopen($path, 'w+b')) { 
 			return false; 
 		} 
 		if (!fwrite($handle, $content)) { 
@@ -63,9 +66,6 @@ class SettingtableController extends Zend_Controller_Action
 		} 
 		fclose($handle); 
 		return true; 
-	}
-	function addStops($string){
-		return preg_replace(array('/^([^_]*?)_/','/_([^_]*?)$/'),array("$1.",".$1"), $string);
 	}
 
 }
