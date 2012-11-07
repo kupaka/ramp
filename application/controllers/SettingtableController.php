@@ -2,25 +2,27 @@
 
 class SettingtableController extends Zend_Controller_Action
 {
-    public function init()
-    {
-    }
+	public function init()
+	{
+	}
 
-    public function indexAction()
-    {
+	public function indexAction()
+	{
 		$this->view->form = new Application_Form_Settingtable();
-    }
+	}
 
-    public function addAction()
+	public function addAction()
 	{
 		if($this->getRequest()->isPost()){	
 			$this->view->form = new Application_Form_SettingtableOptions($this->getRequest()->getPost('tableName'));
 		}
-    }
-    public function writeAction()
-    {
-	   $this->write_ini_file($this->getRequest()->getPost(), APPLICATION_PATH . "/settings/GenFiles/data.ini");
-    }
+	}
+	public function writeAction()
+	{
+		$formArray = $this->getRequest()->getPost();
+		unset($formArray['submit']);
+		$this->write_ini_file($formArray, APPLICATION_PATH . "/settings/GenFiles/data.ini");
+	}
 	function addStops($string){
 		return preg_replace(array('/^([^_]*?)_/','/_([^_]*?)$/'),array("$1.",".$1"), $string);
 	}

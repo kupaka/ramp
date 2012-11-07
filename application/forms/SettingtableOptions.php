@@ -21,7 +21,7 @@ class Application_Form_SettingtableOptions extends Zend_Form
 	{
 		$this->setAction('write');
 		$this->setMethod('post');
-		$tName = $this->createElement('hidden',"id".$this->tablename);
+		$tName = $this->createElement('hidden',"tableName");
 		$tName->setValue($this->tableName);
 		$this->addElement($tName);
 		foreach($this->columnNames as $column)
