@@ -35,7 +35,7 @@ function write_ini_file($assoc_arr, $path, $has_sections=FALSE) {
                         $content .= $key2."[] = \"".$elem2[$i]."\"\n"; 
                     } 
                 } 
-                else if($elem2=="") $content .= $key2." = \n"; 
+                else if($elem2==""); 
                 else $content .= $key2." = \"".$elem2."\"\n"; 
             } 
         } 
@@ -49,7 +49,7 @@ function write_ini_file($assoc_arr, $path, $has_sections=FALSE) {
                     $content .= $key."[] = \"".$elem[$i]."\"\n"; 
                 } 
             } 
-            else if($elem=="") $content .= $key." = \n"; 
+            else if($elem==""); 
             else $content .= $key." = \"".$elem."\"\n"; 
         } 
     } 
