@@ -2,12 +2,14 @@
 
 class Application_Form_SettingtableOptions extends Zend_Form
 {
+	private $tableName;
 	private $columnNames;
 	private $url;
 
 	public function __construct($tablenames){
 		Zend_Db_Table::getDefaultAdapter();
 		$table = new Zend_Db_Table($tablenames);
+		$this->tableName = $tale->name;
 		//$metadata = $table->info();
 		$this->columnNames = $table->info(Zend_Db_Table_Abstract::COLS);
 		parent::__construct();
@@ -19,6 +21,7 @@ class Application_Form_SettingtableOptions extends Zend_Form
 		$url = $this->getView()->url();
 		$this->setAction(substr($url, 0, strlen($url)-4).'/write');
 		$this->setMethod('post');
+		$this->addElement('hidden',"id".$tablenames, array('value'=>$tableName));
 		foreach($this->columnNames as $column)
 		{
 			$name = $this->createElement('text', "field_" . $column . "_label", array('label'=>'Readable name for ' . $column));
