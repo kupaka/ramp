@@ -17,15 +17,20 @@ class SettingtableController extends Zend_Controller_Action
 			$this->view->form = new Application_Form_SettingtableOptions($this->getRequest()->getPost('tableName'));
 		}
 	}
+
 	public function writeAction()
 	{
 		$formArray = $this->getRequest()->getPost();
 		unset($formArray['submit']);
 		$this->write_ini_file($formArray, APPLICATION_PATH . "/settings/GenFiles/data.ini");
+        $filename = "data.ini";
+        $this->view->fileLocation = $filename;
 	}
+
 	function addStops($string){
 		return preg_replace(array('/^([^_]*?)_/','/_([^_]*?)$/'),array("$1.",".$1"), $string);
 	}
+
 	// Method to write an ini file found at http://stackoverflow.com/questions/1268378/create-ini-file-write-values-in-php
 	function write_ini_file($assoc_arr, $path, $has_sections=FALSE) { 
 		$content = ""; 
@@ -68,11 +73,6 @@ class SettingtableController extends Zend_Controller_Action
 		fclose($handle); 
 		return true; 
 	}
-
-        $filename = "data.ini";
-        $this->view->fileLocation = $filename;
-
-
 
     public function downloadAction()
     {
