@@ -33,6 +33,7 @@
         <controllerFile controllerName="Settingtable">
           <actionMethod actionName="index"/>
           <actionMethod actionName="add"/>
+          <actionMethod actionName="download"/>
         </controllerFile>
         <controllerFile controllerName="TableSetup">
           <actionMethod actionName="index"/>
@@ -115,6 +116,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Settingtable">
             <viewScriptFile forActionName="add"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Settingtable">
+            <viewScriptFile forActionName="download"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

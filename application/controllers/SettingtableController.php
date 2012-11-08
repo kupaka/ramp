@@ -69,7 +69,18 @@ class SettingtableController extends Zend_Controller_Action
 		return true; 
 	}
 
+        $filename = "data.ini";
+        $this->view->fileLocation = $filename;
+
+
+
+    public function downloadAction()
+    {
+        $fName = $this->getRequest()->getQuery('file');
+        header('Content-Type: text/plain');
+        header('Content-Disposition: attachment; filename='.$fName);
+        readfile(APPLICATION_PATH.'/settings/GenFiles/'.$fName);
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+    }
 }
-
-
-
