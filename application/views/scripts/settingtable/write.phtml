@@ -1,4 +1,6 @@
 <?php
 $this->title = "Write File";
 $this->headTitle($this->title);
+$url = $this->url(array('action'=>'download','file'=>$this->fileLocation));
+echo "The generated file is available <a href='$url'>here</a>"
 ?>
