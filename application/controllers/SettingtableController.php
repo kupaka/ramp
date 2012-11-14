@@ -17,15 +17,16 @@ class SettingtableController extends Zend_Controller_Action
 			$this->view->form = new Application_Form_SettingtableOptions($this->getRequest()->getPost('tableName'));
 		}
 	}
-
 	public function writeAction()
 	{
 		$formArray = $this->getRequest()->getPost();
 		unset($formArray['submit']);
-		$this->write_ini_file($formArray, APPLICATION_PATH . "/settings/GenFiles/data.ini");
-        $filename = "data.ini";
+        $date = new DateTime();
+        $filename = $formArray['tableName'] . $date->format("Y-m-d_H-i-s") . ".ini";
         $this->view->fileLocation = $filename;
-	}
+		$this->write_ini_file($formArray, APPLICATION_PATH . "/settings/GenFiles/" . $filename);
+
+    }
 
 	function addStops($string){
 		return preg_replace(array('/^([^_]*?)_/','/_([^_]*?)$/'),array("$1.",".$1"), $string);

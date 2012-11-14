@@ -9,8 +9,8 @@ class Application_Form_SettingtableOptions extends Zend_Form
 	public function __construct($tablenames){
 		Zend_Db_Table::getDefaultAdapter();
 		$table = new Zend_Db_Table($tablenames);
-		$this->tableName = $table->name;
-		//$metadata = $table->info();
+		$tableInfo = $table->info();
+		$this->tableName = $tableInfo['name'];
 		$this->columnNames = $table->info(Zend_Db_Table_Abstract::COLS);
 		parent::__construct();
 	}
