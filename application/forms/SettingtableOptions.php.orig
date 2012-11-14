@@ -2,14 +2,12 @@
 
 class Application_Form_SettingtableOptions extends Zend_Form
 {
-	private $tableName;
 	private $columnNames;
 	private $url;
 
 	public function __construct($tablenames){
 		Zend_Db_Table::getDefaultAdapter();
 		$table = new Zend_Db_Table($tablenames);
-		$this->tableName = $table->name;
 		//$metadata = $table->info();
 		$this->columnNames = $table->info(Zend_Db_Table_Abstract::COLS);
 		parent::__construct();
@@ -18,14 +16,13 @@ class Application_Form_SettingtableOptions extends Zend_Form
 	//uses code from http://stackoverflow.com/questions/3848188/appending-or-prepending-html-tags-to-zend-form-element
     public function init()
 	{
-		$this->setAction('write');
+		$url = $this->getView()->url();
+		$this->setAction(substr($url, 0, strlen($url)-4).'/write');
 		$this->setMethod('post');
-		$tName = $this->createElement('hidden',"tableName");
-		$tName->setValue($this->tableName);
-		$this->addElement($tName);
 		foreach($this->columnNames as $column)
 		{
-			$name = $this->createElement('text', "field_" . $column . "_label", array('label'=>'Readable name for ' . $column));
+<<<<<<< Updated upstream
+			$name = $this->createElement('text', $column . "Name", array('label'=>'Readable name for ' . $column));
 			$name->setDecorators(array(
 				'ViewHelper',
 				'Errors',
@@ -35,7 +32,7 @@ class Application_Form_SettingtableOptions extends Zend_Form
 				)
 			));
 			$this->addElement($name);
-			$show = $this->createElement('checkbox', "field_" . $column . "_hide", array('label'=>'Hide '));
+			$show = $this->createElement('checkbox', $column . "Show", array('label'=>'Show '));
 			$show->setDecorators(array(
 				'ViewHelper',
 				'Errors',
@@ -45,6 +42,10 @@ class Application_Form_SettingtableOptions extends Zend_Form
 				)
 			));
 			$this->addElement($show);
+=======
+			$this->addElement('text', 'field.' . $column . '.label', array('label'=>'Readable name for ' . $column));
+			$this->addElement('checkbox', 'field.' . $column . '.hide', array('label'=>'Hide ' . $column));
+>>>>>>> Stashed changes
 		}
 		$this->addElement('submit', 'submit', array('ignore'=> true));
     }
