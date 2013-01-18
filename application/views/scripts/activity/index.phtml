@@ -44,7 +44,7 @@ foreach ( $this->activityList as $key => $activity )
         default:        // SETTING and ACTIVITY_LIST types
                 echo "<dt>";
                 echo "<input type='submit'  name='$key' id='$key' " .
-                    "class='button' " .
+                    "class='button btn' " .
                     "value='" . $activity->getTitle() . "'>";
                 echo "</dt>";
                 echo "<dd>" . $activity->getDescription() . "</dd>";
