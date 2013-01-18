@@ -87,5 +87,16 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return $objFront;
     }
 
+    protected function _initNavigation()
+    {
+        $configSettings = Zend_Registry::get('rampConfigSettings');
+        $menuFilename = isset($configSettings['menuFilename']) ?
+        $configSettings['menuFilename'] : null;
+        $ini = new Zend_Config_Ini($menuFilename);
+        $menu = new Zend_Navigation($ini);
+        $this->bootstrap('view');
+        $view = $this->getResource('view');
+        $view->navigation($menu);
+    }
 }
 

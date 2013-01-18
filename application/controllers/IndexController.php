@@ -80,15 +80,6 @@ class IndexController extends Zend_Controller_Action
             $this->view->pageSubTitle = isset($configSettings[self::SUBTITLE]) ?
                             $configSettings[self::SUBTITLE] : null;
 
-            // Get the appropriate cascading stylesheet from Zend_Registry.
-            $stylesheet =
-                isset($configSettings[self::STYLE_SHEET]) ?
-                    $configSettings[self::STYLE_SHEET] : null;
-            if ( ! empty($stylesheet) )
-            {
-                $this->view->headLink()->prependStylesheet($stylesheet);
-            }
-
         }
 
 // $this->_getAuthDebuggingInfo();
@@ -184,32 +175,6 @@ class IndexController extends Zend_Controller_Action
         }
     }
 
-    /**
-     * Provides the main menu.
-     * From Zend Framework in Action by Allen, Lo, and Brown,
-     *      2009, p. 74.
-     */ 
-    public function menuAction()
-    {
-        // TODO: Convert this to use Zend_Navigation
-
-        // Assigns the menu to the view & changes the response placeholder.
-        $this->view->menu = $this->_readMenu();
-        $this->_helper->viewRenderer->setResponseSegment('menu');
-    }
-
-    /**
-     * Reads in the menu.
-     *
-     * @return string   filename
-     *
-     */
-    protected function _readMenu()
-    {
-        $menu =  new Zend_Config_Ini($this->_menuFilename);
-        return $menu;
-    }
-
 
     protected function _getAuthDebuggingInfo()
     {
@@ -222,14 +187,3 @@ class IndexController extends Zend_Controller_Action
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
