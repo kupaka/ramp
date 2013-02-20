@@ -18,11 +18,12 @@ foreach ( $this->buttonList as $buttonLabel ) :
     $buttonLabel = $this->escape($buttonLabel);
     $buttonId = $this->escape(preg_replace('/[' . $charset . ']/', '', 
                                     (string) $buttonLabel));
-    echo "<li><input type='$buttonType' name='submit' id='$buttonId'
-            value='$buttonLabel' /></li>\n";
+    echo "<li><a class='btn btn-link'><input type='$buttonType' name='submit' id='$buttonId'
+            value='$buttonLabel' class='btn btn-link' /></a></li>\n";
 endforeach;
 ?>
 
-</fieldset>
 </ul>
+</fieldset>
+</div>
 </div>
