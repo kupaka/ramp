@@ -29,32 +29,31 @@ $commonParams = $this->baseParams;      // Set in controller
 $selectParams = $commonParams + array('action'=>'record-view');
 $deleteParams = $commonParams + array('action'=>'delete');
 ?>
-
+<div>
 <form id="list-view-form" enctype="application/x-www-form-urlencoded"
     action="" method="post">
 
 <!-- Display title bar -->
-<div id="titlebar-area">
-
-<!-- Display buttons in sidebar -->
-<?php echo $this->partial("table/_buttonList.phtml",
-            array('buttonList' => $this->buttonList)); ?>
+<div id="titlebar-area" class="fluid-row">
 
 <!-- Display title and messages -->
-<div id="left-column" class="column">  <!-- Contains title block and msgs -->
+<div id="left-column" class="span8">  <!-- Contains title block and msgs -->
 <?php echo $this->partial("table/_titleblockAndMsgs.phtml",
             array('title'=>$pageTitle, 'description' => "",
                   'footnote'=>$tableFootnote, 'instructions'=>$instructions,
                   'msgs'=>$msgs, 'errormsgs'=>$errormsgs)); ?>
 </div>  <!-- End of "left-column" -->
 
+<!-- Display buttons in sidebar -->
+<?php echo $this->partial("table/_buttonList.phtml",
+            array('buttonList' => $this->buttonList, 'formId')); ?>
 </div>  <!-- End of "titlebar-area" -->
 
 
 <!-- Display records -->
 
 <div id='record-list'>
-<table>
+<table class='table'>
 <?php
 $rowNum = 0;
 foreach($tableValues as $recordValues) :
@@ -107,5 +106,5 @@ foreach($tableValues as $recordValues) :
 
 </table>
 </div>  <!-- End of "record-list" -->
-
 </form>
+</div>
