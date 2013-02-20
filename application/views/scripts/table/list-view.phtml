@@ -96,9 +96,9 @@ foreach($tableValues as $recordValues) :
                                   'status' => $status));
         ?>
         <a href="<?php echo $this->url(
-            $selectParams + $rowSpecParams, null, true); ?>">Select</a>
+            $selectParams + $rowSpecParams, null, true); ?>"><i class='icon-pencil'></i></a>
         <a href="<?php echo $this->url(
-            $deleteParams + $rowSpecParams, null, true); ?>">Delete</a>
+            $deleteParams + $rowSpecParams, null, true); ?>"><i class='icon-trash'></i></a>
     </td>
     </tr>
 
