@@ -3,15 +3,7 @@
 <ul id="main-menu" class="nav">
     <?php foreach($this->container as $page)
     {
-        $url = array();
-        if ( isset($page->url) && $page->url != "" )
-        {
-            $url = $page->url;
-            if ( isset($url['activity']) && $url['activity'] != "" )
-                $url['activity'] = urlencode($url['activity']);
-        }
-        $page->url = $this->url($url, null, true);
-        echo '<li><a href="' . $page->url . '">' . $page->label . '</li></a>';
+        echo '<li><a href="' . $page->uri . '">' . $page->label . '</li></a>';
     }
     ?>
 </ul>

@@ -89,13 +89,26 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     protected function _initNavigation()
     {
-        $configSettings = Zend_Registry::get('rampConfigSettings');
-        $menuFilename = isset($configSettings['menuFilename']) ?
-        $configSettings['menuFilename'] : null;
-        $ini = new Zend_Config_Ini($menuFilename);
-        $menu = new Zend_Navigation($ini);
         $this->bootstrap('view');
         $view = $this->getResource('view');
+        $configSettings = Zend_Registry::get('rampConfigSettings');
+        $menuFilename = isset($configSettings['menuFilename']) ?
+            $configSettings['menuFilename'] : null;
+        $menu = new Zend_Navigation();
+        $ini = new Zend_Config_Ini($menuFilename);
+        foreach($ini as $entry)
+        {
+            $uri = (!is_null($entry->url))?
+                $uri = '/' . $entry->url->controller . '/' 
+                    . $entry->url->action . '/activity/' 
+                    //must double encode urls so they work properly with the activityController
+                    . urlencode(urlencode($entry->url->activity))
+                : '/';
+            $menu->addPage(new Zend_Config(array(
+                'label' => $entry->title,
+                'uri' => $uri
+            )));
+        }
         $view->navigation($menu);
     }
 }
