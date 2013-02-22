@@ -92,24 +92,53 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->bootstrap('view');
         $view = $this->getResource('view');
         $configSettings = Zend_Registry::get('rampConfigSettings');
+        $indexFilename = isset($configSettings['initialActivity']) ?
+            $configSettings['initialActivity'] : null;
         $menuFilename = isset($configSettings['menuFilename']) ?
             $configSettings['menuFilename'] : null;
         $menu = new Zend_Navigation();
         $ini = new Zend_Config_Ini($menuFilename);
         foreach($ini as $entry)
         {
-            $uri = (!is_null($entry->url))?
+            $uri = '/';
+            $children = array();
+            //assumption: a menu entry with no url is the home entry
+            if(!is_null($entry->url)){
                 $uri = '/' . $entry->url->controller . '/' 
                     . $entry->url->action . '/activity/' 
                     //must double encode urls so they work properly with the activityController
-                    . urlencode(urlencode($entry->url->activity))
-                : '/';
+                    . urlencode(urlencode($entry->url->activity));
+            }
+            else
+            {
+                $children = $this->_readActivityMenu(APPLICATION_PATH . '/settings/' . $indexFilename);
+            }
             $menu->addPage(new Zend_Config(array(
                 'label' => $entry->title,
-                'uri' => $uri
+                'uri' => $uri,
+                'pages' => $children
             )));
         }
         $view->navigation($menu);
+    }
+
+    protected function _readActivityMenu($filename)
+    {
+        $activityMenu = new Zend_Config_Ini($filename);
+        $pages = array();
+        foreach($activityMenu as $activity)
+        {
+            if(!(is_null($activity->source)))
+            {
+                //assumption: all setting type activities have links
+                $uri = '/table/index/_setting/'. urlencode(urlencode($activity->source));
+                array_push($pages, array(
+                    'label' => $activity->title,
+                    'uri' => $uri
+                ));
+            }
+        }
+        return $pages;
     }
 }
 
