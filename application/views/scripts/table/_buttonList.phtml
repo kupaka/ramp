@@ -6,11 +6,8 @@
 // from Zend_Form_Element.
 $charset = '^a-zA-Z0-9_\x7f-\xff';
 ?>
-<div class='span3 pull-right'>
-<div id="title-sidebar" class='sidebar-nav'>
-<fieldset id="button-list" class="sidebar">
-<ul class='nav nav-tabs nav-stacked'>
-
+<fieldset id="button-list" class="span4">
+<div class="btn-group btn-group-vertical pull-right">
 <?php
 foreach ( $this->buttonList as $buttonLabel ) :
     $buttonType = ( $buttonLabel == TableController::RESET_BUTTON ) ?
@@ -18,12 +15,10 @@ foreach ( $this->buttonList as $buttonLabel ) :
     $buttonLabel = $this->escape($buttonLabel);
     $buttonId = $this->escape(preg_replace('/[' . $charset . ']/', '', 
                                     (string) $buttonLabel));
-    echo "<li><a class='btn btn-link'><input type='$buttonType' name='submit' id='$buttonId'
-            value='$buttonLabel' class='btn btn-link' /></a></li>\n";
+    echo "<input type='$buttonType' name='submit' id='$buttonId'
+            value='$buttonLabel' class='btn' />\n";
 endforeach;
 ?>
 
-</ul>
+</div>
 </fieldset>
-</div>
-</div>

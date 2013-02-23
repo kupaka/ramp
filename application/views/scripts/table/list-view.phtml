@@ -34,10 +34,10 @@ $deleteParams = $commonParams + array('action'=>'delete');
     action="" method="post">
 
 <!-- Display title bar -->
-<div id="titlebar-area" class="fluid-row">
+<div id="titlebar-area">
 
 <!-- Display title and messages -->
-<div id="left-column" class="span8">  <!-- Contains title block and msgs -->
+<div id="left-column">  <!-- Contains title block and msgs -->
 <?php echo $this->partial("table/_titleblockAndMsgs.phtml",
             array('title'=>$pageTitle, 'description' => "",
                   'footnote'=>$tableFootnote, 'instructions'=>$instructions,
@@ -53,7 +53,7 @@ $deleteParams = $commonParams + array('action'=>'delete');
 <!-- Display records -->
 
 <div id='record-list'>
-<table class='table'>
+<table class='table table-striped'>
 <?php
 $rowNum = 0;
 foreach($tableValues as $recordValues) :

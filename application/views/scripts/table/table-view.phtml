@@ -36,9 +36,6 @@ $deleteParams = $commonParams + array('action'=>'delete');
 <!-- Display title bar -->
 <div id="titlebar-area">
 
-<!-- Display buttons in sidebar -->
-<?php echo $this->partial("table/_buttonList.phtml",
-            array('buttonList' => $this->buttonList)); ?>
 
 <!-- Display title and messages -->
 
@@ -49,10 +46,13 @@ $deleteParams = $commonParams + array('action'=>'delete');
                   'msgs'=>$msgs, 'errormsgs'=>$errormsgs)); ?>
 </div>  <!-- End of "left-column" -->
 
+<!-- Display buttons in sidebar -->
+<?php echo $this->partial("table/_buttonList.phtml",
+            array('buttonList' => $this->buttonList)); ?>
 </div>  <!-- End of "titlebar-area" -->
 
 <div id='record-table'>
-<table class='table'>
+<table class='table table-striped'>
 
 <!-- DISPLAY COLUMN HEADERS -->
 <tr>
@@ -108,9 +108,9 @@ foreach($tableValues as $recordValues) :
                                   'status' => $status));
         ?>
         <a href="<?php echo $this->url(
-            $selectParams + $rowSpecParams, null, true); ?>">Select</a>
+            $selectParams + $rowSpecParams, null, true); ?>"><i class="icon-pencil"></i></a>
         <a href="<?php echo $this->url(
-            $deleteParams + $rowSpecParams, null, true); ?>">Delete</a>
+            $deleteParams + $rowSpecParams, null, true); ?>"><i class="icon-trash"></i></a>
     </td>
     </tr>
 
